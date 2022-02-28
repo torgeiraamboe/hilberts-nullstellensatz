@@ -1,0 +1,123 @@
+
+
+\section{Hilbert's nullstellensatz}
+
+This is by no means the shortest proof of this theorem, 
+nor is it the most elegant. 
+I chose to do it this way because it's more involved and has a couple extra moving parts. 
+It was also a good excuse to look into Jacobson rings. 
+
+\begin{theorem}[Hilbert's nullstellensatz]
+Let $k$ be an algebraically closed field, 
+$A$ be the polynomial ring $A = k[t_1, \ldots, t_n]$ and $\mathfrak{a}$ be an ideal of $A$. 
+Then
+\begin{equation*}
+    I(Z(\mathfrak{a})) = \sqrt{\mathfrak{a}}
+\end{equation*}
+\end{theorem}
+
+We are going to do the proof in three smaller steps. 
+\begin{enumerate}
+    \item Proving that ideals of the form $\mathfrak{m}_a = (t_1 - a_1, \ldots t_n - a_n)$ where $a\in k^n$ are the only maximal ideals in $A$. 
+    This is known as the weak Hilbert's nullstellensatz. 
+    \item Proving that the radical of an ideal $\mathfrak{b}$ in a finitely generated $k$-algebra $B$ is equal to the intersection of the maximal ideals in $B$ that contain $\mathfrak{b}$. 
+    This shows that all finitely generated algebras over a field is a Jacobson ring. 
+    \item Deduce the result. 
+\end{enumerate}
+
+\subsection{Part 1}
+\begin{lemma}
+Let $\mathfrak{m}_a = (t_1 - a_1, \ldots t_n - a_n)$ where $a\in k^n$. 
+The ideals of this form are the only maximal ideals in $A$.
+\end{lemma}
+\begin{proof}
+Let $a \in k^n$. 
+We define a the evaluation morphism as follows: 
+\begin{align*}
+    e_{a}: k[t_1,\ldots, t_n]&\longrightarrow k \\
+    f &\longmapsto f(a) .
+\end{align*}
+Note that it is a surjective $k$-algebra homomorphism and since $k$ is algebraically closed, 
+it has kernel $\mathfrak{m}_{a}$. 
+Let $\mathfrak{m}$ be a maximal ideal in $k[t_1, \ldots, t_n]$. Then $k[t_1, \ldots, t_n]/\mathfrak{m}$ is a finitely generated field extension of $k$. 
+By Zariski's lemma, 
+$k[t_1, \ldots, t_n]/\mathfrak{m}$ is in fact a finite field extension, 
+better known as a finite dimensional vector space. 
+Since $k$ is algebraically closed, 
+there is an isomorphism of $k$-algebras
+\begin{equation*}
+    k[t_1, \ldots, t_n]/\mathfrak{m}\longrightarrow k .
+\end{equation*}
+Now, let $a_i$ denote the image of $t_i$. 
+Then we get that $\mathfrak{m}_{a}\subseteq \mathfrak{m}$, 
+which implies $\mathfrak{m}_{a} = \mathfrak{m}$ since $\mathfrak{m}_{a}$ is a maximal ideal. 
+\end{proof}
+
+\subsection{Part 2}
+\begin{lemma}
+Let $k$ be an algebraically closed field, 
+$B$ be a finitely generated $k$-algebra and $\mathfrak{b}$ be an ideal in $B$. 
+Then we have
+\begin{equation*}
+    \sqrt{\mathfrak{b}} = \bigcap_{\mathfrak{b}\subseteq\mathfrak{m}}\mathfrak{m}.
+\end{equation*}
+where $\mathfrak{m}$ are the maximal ideals in $B$.
+\end{lemma}
+\begin{proof}
+First, 
+we note that the projection $\pi:B\rightarrow B/\mathfrak{b}$ induces bijections between the sets
+\begin{itemize}
+    \item prime ideals in $B/\mathfrak{b}$ and prime ideals in $B$ that contain $\mathfrak{b}$,
+    \item maximal ideals in $B/\mathfrak{b}$ and maximal ideals in $B$ that contain $\mathfrak{b}$,
+    \item radical ideals in $B/\mathfrak{b}$ and radical ideals in $B$ that contain $\mathfrak{b}$.
+\end{itemize}
+Hence we only need to prove the statement for $\mathfrak{b}=(0)$, 
+and since it is clear that $\sqrt{(0)}$ is contained in every maximal ideal because $\sqrt{(0)}$ consists of all nilpotent elements, 
+we only need to show that every element not contained in $\sqrt{(0)}$ is not contained in some maximal ideal. 
+
+Let $f\in B$ be non-nilpotent, 
+i.e. $f\in \sqrt{(0)}$. 
+This implies that $$B_f\cong B[t]/(ft-1)$$ is a non-trivial $k$-algebra, 
+hence it has a maximal ideal $\mathfrak{m}$. 
+Consider the morphism $\phi: B \longrightarrow B_f$. 
+This is a morphism of finitely generated $k$-algebras, 
+and by Zariski's lemma, 
+$k\subseteq B/\phi^{-1}(\mathfrak{m})\subseteq B_f/\mathfrak{m}$ is a finite extension, 
+and hence $k\subseteq B/\phi^{-1}(\mathfrak{m})$ is an integral extension. 
+Since $k$ is a field, it is a field itself. 
+This gives us that the inverse image of a maximal ideal is again a maximal ideal, 
+i.e. $\phi^{-1}(\mathfrak{m})$ is a maximal ideal of $B$. 
+But this ideal can't contain $f$. 
+Hence we have shown that every non-nilpotent element is not contained in all maximal ideals. 
+\end{proof}
+
+
+\subsection{Part 3}
+We now deduce the result. 
+\begin{proof}
+Let $a \in k^n$. 
+First, 
+note that $a \in Z(\mathfrak{a})$ if and only if $\mathfrak{a}\subseteq \mathfrak{m}_{a}$. 
+Hence, 
+the maximal ideals containing $\mathfrak{a}$ is just the maximal ideals $\mathfrak{m}_{a}$ such that $a \in Z(\mathfrak{a})$. 
+In the second step we showed that the radical of an ideal was equal to the intersection of all maximal ideals containing it, 
+hence we have 
+\begin{equation*}
+    \sqrt{\mathfrak{a}} = \bigcap_{a \in Z(\mathfrak{a})}\mathfrak{m}_{a}. 
+\end{equation*}
+For the final part, 
+we have for $f\in k[t_1,\ldots,t_n]$ and $a\in k^n$ that $f(x) = 0$ if and only if $f \in \mathfrak{m}_{a}$. 
+Hence we have for subsets $V\subseteq k^n$ that $I(V) = \bigcap_{a \in V}\mathfrak{m}_{a}$. 
+And since $a \in Z(\mathfrak{a})$ if and only if $\mathfrak{a}\subseteq \mathfrak{m}_{a}$ we have finally
+
+\begin{align*}
+    I(Z(\mathfrak{a})) 
+    &= \bigcap_{a \in Z(\mathfrak{a})}\mathfrak{m}_{a} \\
+    &= \sqrt{\mathfrak{a}}.
+\end{align*}
+And by that, we are done!
+\end{proof}
+
+
+
+
